@@ -1,17 +1,18 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
-import { motion, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  useSpring,
+  useMotionValue,
+  AnimatePresence,
+} from "framer-motion";
 import { Heart, Sparkles } from "lucide-react";
 
 // Corner flourish SVG component
 function CornerFlourish({ className }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 100 100"
-      className={className}
-      fill="currentColor"
-    >
+    <svg viewBox="0 0 100 100" className={className} fill="currentColor">
       <path d="M0,0 Q30,0 50,20 Q70,40 70,70 Q40,70 20,50 Q0,30 0,0 M10,10 Q20,10 30,20 Q40,30 40,40 Q30,40 20,30 Q10,20 10,10" />
       <circle cx="60" cy="15" r="4" />
       <circle cx="75" cy="25" r="3" />
@@ -51,7 +52,8 @@ function FloatingElement({
 }) {
   const randomX = Math.random() * 100;
   const randomDuration = 3 + Math.random() * 4;
-  const randomSize = type === "heart" ? 16 + Math.random() * 16 : 12 + Math.random() * 12;
+  const randomSize =
+    type === "heart" ? 16 + Math.random() * 16 : 12 + Math.random() * 12;
 
   return (
     <motion.div
@@ -85,10 +87,7 @@ function FloatingElement({
       }}
     >
       {type === "heart" ? (
-        <Heart
-          size={randomSize}
-          className="text-rose fill-rose/50"
-        />
+        <Heart size={randomSize} className="text-rose fill-rose/50" />
       ) : (
         <div
           className="rounded-full bg-wisteria-light/60"
@@ -130,12 +129,16 @@ function FleeingButton({
       const buttonCenterY = button.top + button.height / 2;
 
       const distance = Math.sqrt(
-        Math.pow(mouseX - buttonCenterX, 2) + Math.pow(mouseY - buttonCenterY, 2)
+        Math.pow(mouseX - buttonCenterX, 2) +
+          Math.pow(mouseY - buttonCenterY, 2),
       );
 
       if (distance < FLEE_THRESHOLD) {
         // Calculate escape direction (away from mouse)
-        const angle = Math.atan2(buttonCenterY - mouseY, buttonCenterX - mouseX);
+        const angle = Math.atan2(
+          buttonCenterY - mouseY,
+          buttonCenterX - mouseX,
+        );
         const escapeDistance = 100 + Math.random() * 50;
 
         // Add some randomness to the escape angle
@@ -169,7 +172,7 @@ function FleeingButton({
         y.set(newY);
       }
     },
-    [x, y, fleeCount, containerRef]
+    [x, y, fleeCount, containerRef],
   );
 
   useEffect(() => {
@@ -211,9 +214,9 @@ function SuccessState() {
   const [floatingElements] = useState(() =>
     Array.from({ length: 30 }, (_, i) => ({
       id: i,
-      type: Math.random() > 0.5 ? "heart" : "petal" as "heart" | "petal",
+      type: Math.random() > 0.5 ? "heart" : ("petal" as "heart" | "petal"),
       delay: i * 0.15,
-    }))
+    })),
   );
 
   return (
@@ -235,7 +238,8 @@ export default function BridgertonValentine() {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
 
-    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    const handler = (e: MediaQueryListEvent) =>
+      setPrefersReducedMotion(e.matches);
     mediaQuery.addEventListener("change", handler);
     return () => mediaQuery.removeEventListener("change", handler);
   }, []);
@@ -288,8 +292,9 @@ export default function BridgertonValentine() {
 
                 {/* Body text */}
                 <p className="font-[family-name:var(--font-cormorant)] text-lg text-ink/80 text-center leading-relaxed mb-8">
-                  This Author has it on excellent authority that a most distinguished
-                  suitor seeks your favor this Valentine&apos;s Day.
+                  This Author has it on excellent authority that a most
+                  distinguished suitor seeks your favor this Valentine&apos;s
+                  Day.
                 </p>
 
                 {/* Main question */}
@@ -395,6 +400,20 @@ export default function BridgertonValentine() {
                   <p className="font-[family-name:var(--font-playfair)] text-lg text-wisteria/80 italic">
                     &mdash; Lady Whistledown
                   </p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="flex justify-center mt-5"
+                >
+                  <img
+                    src="/anthony-bridgerton.gif"
+                    alt="Anthony Bridgerton"
+                    className="rounded-lg shadow-xl border-4 border-[#6B4C9A]/20 max-w-full h-auto"
+                    style={{ maxHeight: "300px" }}
+                  />
                 </motion.div>
               </PamphletBorder>
             </div>
