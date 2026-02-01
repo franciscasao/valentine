@@ -402,19 +402,21 @@ export default function BridgertonValentine() {
                   </p>
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="flex justify-center mt-5"
-                >
-                  <img
-                    src="/anthony-bridgerton.gif"
-                    alt="Anthony Bridgerton"
-                    className="rounded-lg shadow-xl border-4 border-[#6B4C9A]/20 max-w-full h-auto"
-                    style={{ maxHeight: "300px" }}
-                  />
-                </motion.div>
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="flex justify-center mt-5 mb-5"
+                  >
+                    <img
+                      src="/anthony-bridgerton.gif"
+                      alt="Anthony Bridgerton"
+                      className="rounded-lg shadow-xl border-4 border-[#6B4C9A]/20 max-w-full h-auto"
+                      style={{ maxHeight: "300px" }}
+                    />
+                  </motion.div>
+                </AnimatePresence>
               </PamphletBorder>
             </div>
           </motion.div>
